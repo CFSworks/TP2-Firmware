@@ -20,7 +20,4 @@ load ${devtype} ${devnum}:${distro_bootpart} ${loadaddr} /boot/zImage
 load ${devtype} ${devnum}:${distro_bootpart} ${fdt_addr_r} /boot/${fdt_filename}
 fdt addr ${fdt_addr_r}
 
-# Our build of Linux doesn't yet know how to manage the switch, so:
-run ethsw_do_reset
-
 bootz ${loadaddr} - ${fdt_addr_r}
