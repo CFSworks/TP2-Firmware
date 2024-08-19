@@ -122,6 +122,12 @@
 	vcc-pf-supply = <&reg_3v3>;
 	vcc-pg-supply = <&reg_3v3>;
 
+	gpio_pe12_pins: gpio-pe12-pins {
+		pins = "PE12", "PE13";
+		function = "gpio_out";
+		drive-strength = <10>;
+	};
+
 	i2c2_pe12_pins: i2c2-pe12-pins {
 		pins = "PE12", "PE13";
 		function = "i2c2";
@@ -205,8 +211,11 @@
 &i2c2 {
 	status = "okay";
 
-	pinctrl-names = "default";
+	pinctrl-names = "default", "gpio";
 	pinctrl-0 = <&i2c2_pe12_pins>;
+	pinctrl-1 = <&gpio_pe12_pins>;
+	scl-gpios = <&pio 4 12 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>; /* PE12 */
+	sda-gpios = <&pio 4 13 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>; /* PE13 */
 
 	clock-frequency = <100000>;
 
